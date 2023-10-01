@@ -1,7 +1,7 @@
 from .entities.User import User
 
 
-class ModelUser():
+class ModelUser(): 
 
     @classmethod
     def login(self, db, user):
@@ -69,10 +69,11 @@ class ModelUser():
             raise Exception(ex)
         
     @classmethod
-    def get_user(self, db,id):
+    def get_user(self, db, id):
         try:
             parking = db.connection.cursor()
-            parking.execute('SELECT * FROM users WHERE id = %s', (id))
+            sql = "SELECT * FROM users WHERE id = {}".format(id)
+            parking.execute(sql)
             data = parking.fetchone()
             return data
         except Exception as ex:

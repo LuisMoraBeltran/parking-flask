@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+
+{% block body %}
+{% with messages = get_flashed_messages() %}
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div class="container">
+    <div class="col-md-7">
+        <table class="table table-striped table-bordered mt-5">
+            <thead>
+                <td>Estacionamiento</td>
+                <td>Ubicacion</td>
+                <td>Telefono</td>
+                <td>Espacios</td>
+                <td>Operaciones</td>
+                
+            </thead>
+            <tbody>             
+                {% for parkings in listt_parkings %}
+                    <tr>
+                        <td>{{parkings.1}}</td>
+                        <td>{{parkings.2}}</td>
+                        <td>{{parkings.3}}</td>
+                        <td>{{parkings.4}}</td>
+                        <td>
+                            <a class="btn btn-primary" href="/lista_parkings/edit/{{ parkings.0 }}">Editar</a>
+                            <a class="btn btn-danger btn-delete" href="/lista_parkings/delete/{{ parkings.0 }}">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

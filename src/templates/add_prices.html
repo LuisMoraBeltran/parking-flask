@@ -1,0 +1,51 @@
+{% extends './base.html' %} {% block body%}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            {% with messages = get_flashed_messages() %} {% if messages %} {% for
+            message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %} {% endif %} {% endwith %}
+            <div class="card card-body">
+                <form action="/add_price" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                    <div class="form-group">
+                        <label for="time_min">Tiempo mínimo:</label>
+                        <input type="text" name="time_min" placeholder="Tiempo Mínimo" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="time_max">Tiempo máximo:</label>
+                        <input type="text" name="time_max" placeholder="Tiempo Máximo" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="tolerance_time">Tiempo de tolerancia:</label>
+                        <input type="text" name="tolerance_time" placeholder="Tiempo de Tolerancia" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="payment">Precio hora:</label>
+                        <input type="text" name="payment" placeholder="Precio hora" class="form-control" required />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="parking_id">Estacionamiento:</label>
+                        <input type="text" name="parking_id" placeholder="Estacionamiento" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="w-100 btn btn-success btn-block my-2">Save</button>
+                    </div>
+                    
+                    </form>
+                    <div>
+                        <button  type="button" class="w-100 btn btn-md btn-info my-2" onclick="location.href='/get_list_full'">Regresar</button>
+                    </div>
+            </div>
+        </div>
+        <div class="col-md-7"></div>
+    </div>
+</div>
+
+{% endblock %}
